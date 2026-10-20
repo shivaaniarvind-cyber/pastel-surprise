@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise ♡</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Georgia, serif;
+  background: linear-gradient(
+    145deg, #ffe0ec, #e9ddff, #d9f3ff, #fff0cf
+  );
+  background-size: 300% 300%;
+  animation: pastel 12s ease infinite;
+}
+
+.scene {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 12px 0;
+  position: relative;
+  isolation: isolate;
+}
+
+h1 {
+  z-index: 2;
+  margin: 0 0 -5px;
+  text-align: center;
+  font-size: clamp(29px, 8vw, 43px);
+  line-height: 1.35;
+  font-weight: normal;
+  color: #765477;
+  text-shadow: 0 3px 0 #ffffffb5;
+  opacity: 0;
+  animation: pop 0.7s 1.1s cubic-bezier(.2,1.7,.5,1) forwards;
+}
+
+h1 span { color: #de668e; }
+
+.subtitle {
+  color: #9a7296;
+  font: 12px Arial, sans-serif;
+  letter-spacing: 3px;
+  margin: 12px 0 0;
+  opacity: 0;
+  animation: fade 1s 1.8s forwards;
+}
+
+.bear {
+  position: relative;
+  width: 270px;
+  height: 325px;
+  flex-shrink: 0;
+  margin-top: 12px;
+  animation: rise 1.4s cubic-bezier(.18,.8,.3,1.2) both,
+             float 3s 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 12px 10px #8e70952b);
+}
+
+/* Teddy ears */
+.ear {
+  position: absolute;
+  width: 76px;
+  height: 82px;
+  border-radius: 50%;
+  background: #bd815e;
+  border: 5px solid #a96e50;
+  top: 45px;
+  z-index: 1;
+}
+.ear.left { left: 36px; transform: rotate(-22deg); }
+.ear.right { right: 36px; transform: rotate(22deg); }
+
+.ear:after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  background: #f5b7bd;
+}
+
+/* Head */
+.head {
+  position: absolute;
+  width: 184px;
+  height: 166px;
+  top: 57px;
+  left: 43px;
+  border-radius: 48% 48% 45% 45%;
+  background: linear-gradient(145deg,#e9bb91,#c88d66);
+  border: 4px solid #b77c59;
+  z-index: 2;
+}
+
+/* Birthday cap */
+.hat {
+  position: absolute;
+  top: -43px;
+  left: 53px;
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 65px solid #ff8fb2;
+  transform: rotate(9deg);
+  z-index: 4;
+}
+.hat:after {
+  content: "✦";
+  position: absolute;
+  top: 29px;
+  left: -8px;
+  color: #fff6bf;
+  font-size: 18px;
+}
+.hat:before {
+  content: "";
+  position: absolute;
+  width: 76px;
+  height: 13px;
+  background: #a88af4;
+  border-radius: 50%;
+  top: 56px;
+  left: -38px;
+}
+
+.eye {
+  position: absolute;
+  width: 12px;
+  height: 16px;
+  background: #51372f;
+  border-radius: 50%;
+  top: 65px;
+}
+.eye.left { left: 42px; }
+.eye.right { right: 42px; }
+
+.eye:after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  right: 2px;
+}
+
+.blush {
+  position: absolute;
+  top: 88px;
+  width: 29px;
+  height: 15px;
+  background: #f39da8a8;
+  border-radius: 50%;
+}
+.blush.left { left: 17px; }
+.blush.right { right: 17px; }
+
+.muzzle {
+  position: absolute;
+  top: 79px;
+  left: 57px;
+  width: 62px;
+  height: 48px;
+  background: #ffe0bd;
+  border-radius: 50%;
+}
+.nose {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  width: 15px;
+  height: 11px;
+  background: #62443c;
+  border-radius: 50% 50% 55% 55%;
+}
+.mouth {
+  position: absolute;
+  left: 30px;
+  top: 22px;
+  width: 2px;
+  height: 9px;
+  background: #62443c;
+}
+.mouth:after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: -5px;
+  width: 12px;
+  height: 7px;
+  border-bottom: 2px solid #62443c;
+  border-radius: 50%;
+}
+
+/* Teddy body */
+.body {
+  position: absolute;
+  top: 190px;
+  left: 65px;
+  width: 140px;
+  height: 123px;
+  background: linear-gradient(140deg,#e9bb91,#c88d66);
+  border: 4px solid #b77c59;
+  border-radius: 47% 47% 40% 40%;
+  z-index: 1;
+}
+.belly {
+  position: absolute;
+  width: 83px;
+  height: 76px;
+  left: 25px;
+  top: 27px;
+  background: #f8d8b7;
+  border-radius: 50%;
+}
+
+.leg {
+  position: absolute;
+  width: 65px;
+  height: 54px;
+  top: 275px;
+  border-radius: 50%;
+  background: #d5a078;
+  border: 4px solid #b77c59;
+  z-index: 0;
+}
+.leg.left { left: 48px; transform: rotate(12deg); }
+.leg.right { right: 48px; transform: rotate(-12deg); }
+
+.arm {
+  position: absolute;
+  width: 58px;
+  height: 86px;
+  top: 194px;
+  border-radius: 50%;
+  background: #d7a17a;
+  border: 4px solid #b77c59;
+  z-index: 3;
+}
+.arm.left { left: 30px; transform: rotate(30deg); }
+.arm.right { right: 30px; transform: rotate(-30deg); }
+
+/* Cake with exactly three candles */
+.cake {
+  position: absolute;
+  z-index: 5;
+  width: 126px;
+  height: 83px;
+  left: 72px;
+  top: 204px;
+  animation: cakeWiggle 2.4s 2s ease-in-out infinite;
+}
+.plate {
+  position: absolute;
+  bottom: 0;
+  width: 136px;
+  height: 13px;
+  left: -5px;
+  background: #9d87ec;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+.icing {
+  position: absolute;
+  top: 26px;
+  left: 7px;
+  width: 112px;
+  height: 17px;
+  background: #fff4f8;
+  border-radius: 8px 8px 50% 50%;
+  z-index: 2;
+}
+.icing:after {
+  content: "••••";
+  position: absolute;
+  left: 24px;
+  top: 1px;
+  color: #ff9fba;
+  letter-spacing: 10px;
+  font-size: 10px;
+}
+.cakebody {
+  position: absolute;
+  left: 10px;
+  top: 35px;
+  width: 106px;
+  height: 37px;
+  background: #ffacd0;
+  border-radius: 3px 3px 12px 12px;
+  border-bottom: 5px solid #f18ab6;
+}
+.candles {
+  position: absolute;
+  top: 0;
+  left: 27px;
+  display: flex;
+  gap: 14px;
+  z-index: 3;
+}
+.candle {
+  position: relative;
+  width: 9px;
+  height: 31px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    -45deg, #fff 0 5px, #9edfff 5px 9px
+  );
+}
+.candle:nth-child(2) {
+  background: repeating-linear-gradient(
+    -45deg, #fff 0 5px, #d7a7ff 5px 9px
+  );
+}
+.candle:nth-child(3) {
+  background: repeating-linear-gradient(
+    -45deg, #fff 0 5px, #ffb1c6 5px 9px
+  );
+}
+.flame {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  top: -15px;
+  left: -1px;
+  border-radius: 50% 50% 45% 45%;
+  background: #ffcf65;
+  box-shadow: 0 0 12px #ffcf65;
+  animation: flicker .5s infinite alternate;
+}
+
+.sparkle {
+  position: absolute;
+  color: white;
+  font-size: 25px;
+  animation: twinkle 1.8s infinite alternate;
+}
+.s1 { top: 24%; left: 12%; }
+.s2 { top: 31%; right: 12%; animation-delay: .6s; }
+.s3 { top: 58%; left: 7%; animation-delay: .3s; }
+.s4 { top: 65%; right: 8%; animation-delay: .9s; }
+.s5 { top: 17%; right: 28%; color: #ff9fc4; }
+
+.heart {
+  position: absolute;
+  bottom: -30px;
+  color: #f48db7;
+  animation: floatHeart 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rise {
+  from { transform: translateY(120vh) scale(.7); opacity: 0; }
+  75% { transform: translateY(-8px) scale(1.03); opacity: 1; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(.25) translateY(25px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes float {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes cakeWiggle {
+  0%,100% { rotate: 0deg; }
+  50% { rotate: 2deg; }
+}
+@keyframes pastel {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes flicker {
+  from { transform: scale(.9) rotate(-5deg); }
+  to { transform: scale(1.1) rotate(5deg); }
+}
+@keyframes twinkle {
+  from { opacity: .35; transform: scale(.7) rotate(0deg); }
+  to { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+@keyframes fade {
+  to { opacity: 1; }
+}
+@keyframes floatHeart {
+  from { transform: translateY(0) rotate(0deg); opacity: 0; }
+  15% { opacity: .8; }
+  to { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+}
+
+@media(max-height: 650px) {
+  .scene { transform: scale(.83); transform-origin: top center; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="scene">
+
+  <div class="sparkle s1">✦</div>
+  <div class="sparkle s2">✧</div>
+  <div class="sparkle s3">♡</div>
+  <div class="sparkle s4">✦</div>
+  <div class="sparkle s5">✧</div>
+
+  <h1>Happy Birthday,<br><span>My Love 🖤😚</span></h1>
+  <p class="subtitle">A LITTLE SURPRISE JUST FOR YOU ♡</p>
+
+  <div class="bear">
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+
+    <div class="head">
+      <div class="hat"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="blush left"></div>
+      <div class="blush right"></div>
+      <div class="muzzle">
+        <div class="nose"></div>
+        <div class="mouth"></div>
+      </div>
+    </div>
+
+    <div class="leg left"></div>
+    <div class="leg right"></div>
+
+    <div class="body">
+      <div class="belly"></div>
+    </div>
+
+    <div class="arm left"></div>
+    <div class="arm right"></div>
+
+    <div class="cake">
+      <div class="candles">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+      </div>
+      <div class="icing"></div>
+      <div class="cakebody"></div>
+      <div class="plate"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const symbols = ["♡", "♥", "✦", "✧"];
+
+function makeHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (14 + Math.random() * 17) + "px";
+  heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 9000);
+}
+
+for (let i = 0; i < 12; i++) {
+  setTimeout(makeHeart, i * 450);
+}
+setInterval(makeHeart, 900);
+</script>
+</body>
+</html>
